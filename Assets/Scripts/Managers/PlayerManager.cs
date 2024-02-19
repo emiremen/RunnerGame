@@ -124,26 +124,23 @@ public class PlayerManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.UpArrow) && !isActingMovement && isGrounded && !animator.GetBool("isSliding"))
         {
             isActingMovement = true;
-            // transform.DOJump(transform.position + new Vector3(0, 2, moveSpeed), jumpPower, 1, 1f).SetId("Movement").OnStart(()=>{
             playerRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 
             animator.SetBool("isJumping", true);
 
-            //StartCoroutine(nameof(SetAnimationToRunning));
 
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) && !isActingMovement && isGrounded)
         {
             animator.SetBool("isSliding", true);
-            DOTween.To(() => playerCollider.height, x => playerCollider.height = x, 0.6f, 1f).OnStart(() =>
+            DOTween.To(() => playerCollider.height, x => playerCollider.height = x, 0.6f, .5f).OnStart(() =>
             {
-                DOTween.To(() => playerCollider.center, x => playerCollider.center = x, new Vector3(0, 0.3f, 0), 1f);
+                DOTween.To(() => playerCollider.center, x => playerCollider.center = x, new Vector3(0, 0.3f, 0), .5f);
             }).OnComplete(() =>
             {
                 DOTween.To(() => playerCollider.height, x => playerCollider.height = x, 1.52f, 0.5f);
                 DOTween.To(() => playerCollider.center, x => playerCollider.center = x, new Vector3(0, 0.7f, 0), 0.5f);
             });
-            //StartCoroutine(nameof(SetAnimationToRunning));
 
         }
     }
@@ -165,7 +162,7 @@ public class PlayerManager : MonoBehaviour
         isDead = true;
         gameObject.tag = "Untagged";
         var cam = EventManager.getCinemachine?.Invoke();
-        cam.transform.DORotate(new Vector3(30, 0, 0), 2f);
+        cam.transform.DORotate(new Vector3(40, 0, 0), 2f);
         DOTween.Kill("Movement");
 
         EventManager.showGameOverPanel?.Invoke();
@@ -187,20 +184,5 @@ public class PlayerManager : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + groundCheckSphereOffset, groundCheckSphereRadius);
     }
 
-    // void OnTriggerEnter(Collider other)
-    // {
-    //     if (!other.CompareTag("Player"))
-    //     {
-    //         isGrounded = false;
-    //     }
-    // }
-
-    // void OnTriggerExit(Collider other)
-    // {
-    //     if (!other.CompareTag("Player"))
-    //     {
-    //         isGrounded = true;
-    //     }
-    // }
 }
 

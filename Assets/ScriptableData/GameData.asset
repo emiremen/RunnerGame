@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3996781c2d3d58b41bc74978c9521960, type: 3}
   m_Name: GameData
   m_EditorClassIdentifier: 
-  bestScore: 67
-  totalCoins: 4
+  bestScore: 21
+  totalCoins: 1

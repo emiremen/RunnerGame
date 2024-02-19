@@ -107,8 +107,8 @@ Material:
     - _ClearCoatMask: 0
     - _ClearCoatSmoothness: 0
     - _Cull: 2
-    - _CurveX: 0.00048013424
-    - _CurveY: -0.00045
+    - _CurveX: -0.0003870488
+    - _CurveY: -0.00034
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1

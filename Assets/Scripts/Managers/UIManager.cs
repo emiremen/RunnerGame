@@ -57,9 +57,10 @@ public class UIManager : MonoBehaviour
     private void ShowGameOverPanel()
     {
         scoreValue = (int)EventManager.getPlayer?.Invoke().transform.position.z;
-        if (scoreValue + coinsValue > gameDataSO.bestScore)
+        if ((scoreValue + coinsValue) > gameDataSO.bestScore)
         {
-            gameDataSO.bestScore += scoreValue + coinsValue;
+            gameDataSO.bestScore = (scoreValue + coinsValue);
+            gameDataSO.SaveGameData();
             gameOverBestScoreText.color = Color.blue;
             DOTween.To(() => gameOverBestScoreText.fontSize, x => gameOverBestScoreText.fontSize = x, 150, .6f).SetEase(Ease.OutSine).SetLoops(-1, LoopType.Yoyo);
             gameOverBestScoreText.text = "New Best: " + PlayerPrefs.GetInt(nameof(gameDataSO.bestScore), 0).ToString();
@@ -82,7 +83,7 @@ public class UIManager : MonoBehaviour
         inGamePanel.SetActive(false);
         gameOverPanel.SetActive(true);
         gameOverScoreText.text = "Score: " + scoreValue.ToString() + "m";
-        gameOverCoinsText.text = "Coins: " + PlayerPrefs.GetInt(nameof(gameDataSO.totalCoins), 0).ToString();
+        gameOverCoinsText.text = "Coins: " + coinsValue.ToString();
     }
 
     private void UpdateCoinScore()
